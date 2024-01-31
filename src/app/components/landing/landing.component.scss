@@ -1,0 +1,44 @@
+$primary-color: #1160cf;
+$btn-color: #3f51b5;
+
+.width-250px {
+    width: 250px;
+}
+
+.left {
+    background-color: $primary-color;
+    color: white;
+    p {
+        font-size: larger;
+    }
+}
+
+.top-bar {
+    height: 60px;
+    background-color: $primary-color;
+    color: white;
+    img {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+.initials {
+    padding: 7px;
+    border-radius: 50%;
+    background-color: $btn-color;
+    margin: 0;
+}
+
+.profile {
+    p {
+        margin: 0;
+    }
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.font-larger {
+    font-size: larger;
+}

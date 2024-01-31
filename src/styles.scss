@@ -1,1 +1,116 @@
 /* You can add global styles to this file, and also import other style files */
+@import "@angular/material/prebuilt-themes/indigo-pink.css";
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Rubik+Bubbles&display=swap');
+$primary-color: #1160cf;
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    ;
+}
+
+// Size
+.full-height {
+    height: 100%;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.half-width {
+    width: 50%;
+}
+
+.width-90 {
+    width: 90%;
+}
+
+.height-90 {
+    height: 90%;
+}
+
+.width-50 {
+    width: 50%;
+}
+
+// Common styles
+.padding-20px {
+    padding: 10px;
+}
+
+.box-sizing {
+    box-sizing: border-box;
+}
+
+// .margin-10 {
+//     margin: 0px 10px;
+// }
+
+// Flex styles
+.flex {
+    display: flex !important;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-1 {
+    flex: 1;
+}
+
+.center-center {
+    justify-content: center;
+    align-items: center;
+}
+
+.column {
+    flex-direction: column;
+}
+
+.spacebetween {
+    justify-content: space-between;
+}
+
+.gap-2em {
+    gap: 2em;
+}
+
+.gap-1em {
+    gap: 1em;
+}
+
+.spacebetween-center {
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.link {
+    &:hover {
+        cursor: pointer;
+        text-decoration: underline;
+    }
+}
+
+// Snack Bar positioning
+
+.mat-mdc-snack-bar-container {
+    .mdc-snackbar__surface {
+        position: absolute;
+        bottom: 30px;
+        right: -490px;
+    }
+}
+
+.mat-mdc-snack-bar-container {
+    --mat-mdc-snack-bar-button-color: white;
+    --mdc-snackbar-container-color: #1160cf;
+    --mdc-snackbar-supporting-text-color: rgba(255, 255, 255);
+}
