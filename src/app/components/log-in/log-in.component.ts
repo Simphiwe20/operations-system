@@ -21,13 +21,13 @@ export class LogInComponent {
   submit(form: NgForm): any {
     if(!form.valid) return
 
-    this.users = this.sharedService.getUsers()
+    this.users = this.sharedService.getData('users')
     console.log(this.users)
     let user = this.users.find((user: any) => user.email === this.userCredentials.email)
     if(user) {
       if(user.password === this.userCredentials.password) {
         this.router.navigate(['/landing'])
-        this.sharedService.storeUsers(user)
+        this.sharedService.storeData('session', 'user', user)
       }else {
         this.snackBar.open('Password is incorrect', 'OK', {duration: 3000})
       }

@@ -1,0 +1,28 @@
+$btn-color: #3f51b5;
+
+.table {
+    height: calc(100% - 60px - 20px - 16px - 40px);
+}
+
+
+input[type='file'] {
+    display: none;
+}
+
+label {
+    margin-top: 10px;
+    display: inline-block;
+    padding: 10px;
+    background-color: $btn-color;
+    color: white;
+    font-size:medium;
+    border-radius: 5px;
+    &:hover {
+        cursor: pointer;
+        box-shadow: 5px 5px 5px lightgray;
+    }
+}
+
+.block { 
+    display: block;
+ }

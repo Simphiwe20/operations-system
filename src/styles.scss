@@ -48,9 +48,9 @@ body {
     box-sizing: border-box;
 }
 
-// .margin-10 {
-//     margin: 0px 10px;
-// }
+.margin-10 {
+    margin-top:10px;
+}
 
 // Flex styles
 .flex {
@@ -93,7 +93,7 @@ body {
 }
 
 .link {
-    &:hover {
+    &:hover{
         cursor: pointer;
         text-decoration: underline;
     }

@@ -8,7 +8,7 @@
             </div>
             <button mat-raised-button class="half-width" (click)="LogOut()" color="primary">Log Out</button>
         </div>
-        <div class="right flex column full-width margin-10 gap-1em">
+        <div class="right flex column full-width gap-1em">
             <div class="top-bar flex spacebetween-center full-width box-sizing padding-20px">
                 <div class="flex center-center gap-1em">
                     <img src="../../../assets/netrinos.jpeg" alt="">
@@ -16,14 +16,14 @@
                 </div>
                 <div class="profile flex column center-center">
                     <div class="initials flex center-center">
-                        <p>{{initials}}</p>
+                        <p matTooltip="Click to view profile">{{initials}}</p>
                     </div>
-                    <p>{{user.firstName}} {{user.lastName}}</p>
+                    <p matTooltip="Click to view profile">{{user.firstName}} {{user.lastName}}</p>
                 </div>
             </div>
             <div class="flex flex-1">
-                <div *ngIf="clicked">
-                    <router-outlet class="full-width"></router-outlet>
+                <div *ngIf="clicked" class="full-width">
+                    <router-outlet></router-outlet>
                 </div>
                 <div *ngIf="dashboardClicked" class="full-width padding-20px">
                     <router-outlet></router-outlet>
