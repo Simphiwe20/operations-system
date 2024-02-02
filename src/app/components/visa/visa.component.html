@@ -1,5 +1,6 @@
 <div class="full-width">
-    <h2 class="flex center-center" *ngIf="user.role !== 'operations personnel'">Policies</h2>
+    <h2 class="flex center-center" *ngIf="user.role === 'employee'">Make Visa Request</h2>
+    <h2 class="flex center-center" *ngIf="user.role === 'operations personnel'">Visa Requests</h2>
     <div class="table">
         <mat-form-field>
             <mat-label>Filter</mat-label>
@@ -59,6 +60,6 @@
         </div>
     </div>
     <div class="flex center-center margin-10">
-        <button mat-raised-button class="" (click)="RequestGH()" *ngIf="user.role !== 'operations personnel'" color="primary">Add Policy</button>
+        <button mat-raised-button class="" (click)="RequestGH()" *ngIf="user.role === 'employee'" color="primary">Visa Request</button>
     </div>
 </div>

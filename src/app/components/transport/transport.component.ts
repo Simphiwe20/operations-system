@@ -7,11 +7,11 @@ import { LeaveFormComponent } from 'src/app/forms/leave-form/leave-form.componen
 import { SharedServiceService } from 'src/app/services/shared-service.service';
 
 @Component({
-  selector: 'app-policies',
-  templateUrl: './policies.component.html',
-  styleUrls: ['./policies.component.scss']
+  selector: 'app-transport',
+  templateUrl: './transport.component.html',
+  styleUrls: ['./transport.component.scss']
 })
-export class PoliciesComponent {
+export class TransportComponent {
   displayedColumns: string[] = ['id', 'name', 'progress', 'fruit', 'occupation', 'status'];
   dataSource!: MatTableDataSource<any>;
   user: any;

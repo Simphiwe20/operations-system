@@ -1,0 +1,27 @@
+<form class=" padding-20px flex column">
+    <mat-form-field appearance="fill">
+        <mat-label>Leave Type</mat-label>
+        <mat-select>
+            <mat-option *ngFor="let type of leaveTypes" [value]="type">
+                {{type}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+        <mat-label>Start Date</mat-label>
+        <input matInput [matDatepicker]="picker" readonly>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+        <mat-label>End Date</mat-label>
+        <input matInput [matDatepicker]="picker1" readonly>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+    </mat-form-field>
+    <div class="flex spacebetween-center">
+        <button mat-raised-button class="" color="accent">Cancel</button>
+        <button mat-raised-button class="" color="primary">Apply</button>
+    </div>
+
+</form>

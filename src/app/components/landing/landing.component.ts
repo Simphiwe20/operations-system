@@ -27,7 +27,33 @@ export class LandingComponent {
         {menu: 'View Approved leaves', route: 'approved-leaves'},
         {menu: 'Policies', route: 'policies'}
       ]
-    } 
+    }else if(this.user.role === 'employee') {
+      this.menuItems = [
+        {menu: 'Leaves', route: 'leaves'},
+        {menu: 'GuestHouse', route: 'guesthouse'},
+        {menu: 'Visa', route: 'visa'},
+        {menu: 'Transport', route: 'transport'},
+        {menu: 'Travels', route: 'travels'}
+
+      ]
+    }else if(this.user.role === 'operations personnel') {
+      this.menuItems = [
+        {menu: 'GuestHouse', route: 'guesthouse'},
+        {menu: 'Visa', route: 'visa'},
+        {menu: 'Transport', route: 'transport'},
+        {menu: 'Travels', route: 'travels'}
+      ]
+    }else {
+      this.menuItems = [
+        {menu: 'Action Leaves', route: 'leaves'},
+        {menu: 'Action Travels Request', route: 'travels'},
+        {menu: 'Leaves', route: 'leaves'},
+        {menu: 'GuestHouse', route: 'guesthouse'},
+        {menu: 'Visa', route: 'visa'},
+        {menu: 'Transport', route: 'transport'},
+        {menu: 'Travels', route: 'travels'}
+      ]
+    }
   }
 
 

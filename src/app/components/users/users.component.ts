@@ -15,6 +15,8 @@ export class UsersComponent implements AfterViewInit {
   ExcelData: any;
   displayedColumns: string[] = ['id', 'name', 'progress', 'fruit', 'occupation'];
   dataSource: MatTableDataSource<any>;
+  users: any;
+  employees: any;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -24,7 +26,9 @@ export class UsersComponent implements AfterViewInit {
 
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource(this.sharedService.getData('employees'));
-    sharedService.generatePwd()
+    console.log(this.dataSource)
+    console.log(sharedService.generatePwd())
+    this.users = this.sharedService.getData('users')
   }
 
   ngAfterViewInit() {
@@ -35,8 +39,8 @@ export class UsersComponent implements AfterViewInit {
   onFileChange(event: any): void {
     let file = event.target.files[0];
     let fileReader = new FileReader();
-    fileReader.readAsBinaryString(file)
-
+    // fileReader.readAsBinaryString(file)
+    fileReader.readAsArrayBuffer(file);
     fileReader.onload = (e: any) => {
       let workBook = XLSX.read(fileReader.result, { type: 'binary' });
       let sheetNames = workBook.SheetNames;
@@ -44,11 +48,11 @@ export class UsersComponent implements AfterViewInit {
       console.log(this.ExcelData)
       this.sharedService.storeData('local', 'employees', this.ExcelData)
       this.dataSource = new MatTableDataSource(this.sharedService.getData('employees'));
-
+      this.sharedService.storeNewUsers()
 
     };
 
-    fileReader.readAsArrayBuffer(file);
+    // fileReader.readAsArrayBuffer(file);
   }
 
   applyFilter(event: Event) {

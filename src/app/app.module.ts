@@ -13,6 +13,11 @@ import { PoliciesComponent } from './components/policies/policies.component';
 import { LeavesComponent } from './components/leaves/leaves.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { GuesthouseComponent } from './components/guesthouse/guesthouse.component';
+import { VisaComponent } from './components/visa/visa.component';
+import { TransportComponent } from './components/transport/transport.component';
+import { TravelsComponent } from './components/travels/travels.component';
+import { LeaveFormComponent } from './forms/leave-form/leave-form.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +28,12 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     PoliciesComponent,
     LeavesComponent,
     PageNotFoundComponent,
-    DashboardComponent
+    DashboardComponent,
+    GuesthouseComponent,
+    VisaComponent,
+    TransportComponent,
+    TravelsComponent,
+    LeaveFormComponent
   ],
   imports: [
     BrowserModule,
