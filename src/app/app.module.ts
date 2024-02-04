@@ -18,6 +18,11 @@ import { VisaComponent } from './components/visa/visa.component';
 import { TransportComponent } from './components/transport/transport.component';
 import { TravelsComponent } from './components/travels/travels.component';
 import { LeaveFormComponent } from './forms/leave-form/leave-form.component';
+import { PolicyFormComponent } from './forms/policy-form/policy-form.component';
+import { TravelsFormComponent } from './forms/travels-form/travels-form.component';
+import { VisaFormComponent } from './forms/visa-form/visa-form.component';
+import { GuesthouseFormComponent } from './forms/guesthouse-form/guesthouse-form.component';
+import { TransportFormComponent } from './forms/transport-form/transport-form.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +38,12 @@ import { LeaveFormComponent } from './forms/leave-form/leave-form.component';
     VisaComponent,
     TransportComponent,
     TravelsComponent,
-    LeaveFormComponent
+    LeaveFormComponent,
+    PolicyFormComponent,
+    TravelsFormComponent,
+    VisaFormComponent,
+    GuesthouseFormComponent,
+    TransportFormComponent
   ],
   imports: [
     BrowserModule,

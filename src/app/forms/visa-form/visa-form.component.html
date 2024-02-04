@@ -1,0 +1,24 @@
+<div class="padding-20px flex column">
+    <mat-form-field appearance="fill">
+        <mat-label>Visa Request Type</mat-label>
+        <mat-select #sel>
+            <mat-option *ngFor="let type of visaRequestTypes" [value]="type">
+                {{type}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field *ngIf="sel.value === 'Replacement'" class="example-full-width">
+        <mat-label>Reason for Replacement</mat-label>
+        <input matInput placeholder="Ex. Privacy Policy">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+        <mat-label>Needed Date</mat-label>
+        <input matInput [matDatepicker]="picker" readonly>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <div class="flex center-center gap-1em">
+        <button mat-raised-button class="" color="primary">Request Visa</button>
+        <button mat-raised-button class="" color="accent">Cancel</button>
+    </div>
+</div>

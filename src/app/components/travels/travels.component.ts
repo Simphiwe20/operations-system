@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { LeaveFormComponent } from 'src/app/forms/leave-form/leave-form.component'
+import { TravelsFormComponent } from 'src/app/forms/travels-form/travels-form.component';
 import { SharedServiceService } from 'src/app/services/shared-service.service';
 
 @Component({
@@ -44,6 +44,6 @@ export class TravelsComponent {
   }
 
   RequestGH(): void {
-    this.matDialog.open(LeaveFormComponent)
+    this.matDialog.open(TravelsFormComponent)
   }
 }

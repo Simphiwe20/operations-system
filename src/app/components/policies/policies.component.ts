@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { LeaveFormComponent } from 'src/app/forms/leave-form/leave-form.component'
+import { PolicyFormComponent } from 'src/app/forms/policy-form/policy-form.component';
 import { SharedServiceService } from 'src/app/services/shared-service.service';
 
 @Component({
@@ -12,7 +12,7 @@ import { SharedServiceService } from 'src/app/services/shared-service.service';
   styleUrls: ['./policies.component.scss']
 })
 export class PoliciesComponent {
-  displayedColumns: string[] = ['id', 'name', 'progress', 'fruit', 'occupation', 'status'];
+  displayedColumns: string[] = ['name', 'category', 'action', 'download' ];
   dataSource!: MatTableDataSource<any>;
   user: any;
 
@@ -23,7 +23,7 @@ export class PoliciesComponent {
     this.dataSource = new MatTableDataSource<any>;
     this.user = sessionStorage.getItem('user')
     this.user = this.user ? JSON.parse(this.user) : {}
-
+    console.log(this.dataSource)
   }
 
 
@@ -43,6 +43,6 @@ export class PoliciesComponent {
   }
 
   RequestGH(): void {
-    this.matDialog.open(LeaveFormComponent)
+    this.matDialog.open(PolicyFormComponent)
   }
 }

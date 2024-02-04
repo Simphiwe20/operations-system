@@ -64,7 +64,7 @@ export class SharedServiceService {
           password: this.generatePwd(),
           role: employee.Department.toLowerCase() == 'hr' ? 'admin' :
             employee.Department.toLowerCase() == 'operations' ? 'operations personnel' :
-            employee.Occupation.split(' ')[1].toLowerCase() == 'manager' ? 'manager' : 'employee'
+            employee.Occupation.toLowerCase() == 'manager' ? 'manager' : 'employee'
         })
       }
     })

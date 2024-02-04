@@ -12,34 +12,34 @@
 
                 <!-- Persal No Column -->
                 <ng-container matColumnDef="id">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Persal Number </th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Req ID </th>
                     <td mat-cell *matCellDef="let row"> {{row.Email}} </td>
+                </ng-container>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="progress">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Travel Type </th>
+                    <td mat-cell *matCellDef="let row"> {{row.Surname}} </td>
                 </ng-container>
 
                 <!-- Surname Column -->
                 <ng-container matColumnDef="name">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Start Date </th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Departure Date </th>
                     <td mat-cell *matCellDef="let row"> {{row.Name}} </td>
                 </ng-container>
 
                 <!-- Department Column -->
                 <ng-container matColumnDef="fruit">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> End Date </th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Return Date </th>
                     <td mat-cell *matCellDef="let row"> {{row.Department}} </td>
                 </ng-container>
 
                 <!-- Occupation Column -->
                 <ng-container matColumnDef="occupation">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Days </th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Travel Reason </th>
                     <td mat-cell *matCellDef="let row"> {{row.Occupation}} </td>
                 </ng-container>
 
-
-                <!-- Name Column -->
-                <ng-container matColumnDef="progress">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Leave Type </th>
-                    <td mat-cell *matCellDef="let row"> {{row.Surname}} </td>
-                </ng-container>
 
                 <!-- Occupation Column -->
                 <ng-container matColumnDef="status">
@@ -60,6 +60,7 @@
         </div>
     </div>
     <div class="flex center-center margin-10">
-        <button mat-raised-button class="" (click)="RequestGH()" *ngIf="user.role ==='employee'" color="primary">Request Guest House</button>
+        <button mat-raised-button class="" (click)="RequestGH()" *ngIf="user.role ==='employee'" color="primary">Request
+            Travel</button>
     </div>
 </div>

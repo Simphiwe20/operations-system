@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { LeaveFormComponent } from 'src/app/forms/leave-form/leave-form.component'
+import { VisaFormComponent } from 'src/app/forms/visa-form/visa-form.component';
 import { SharedServiceService } from 'src/app/services/shared-service.service';
 
 @Component({
@@ -12,7 +12,7 @@ import { SharedServiceService } from 'src/app/services/shared-service.service';
   styleUrls: ['./visa.component.scss']
 })
 export class VisaComponent {
-  displayedColumns: string[] = ['id', 'name', 'progress', 'fruit', 'occupation', 'status'];
+  displayedColumns: string[] = ['id', 'name', 'fruit', 'status'];
   dataSource!: MatTableDataSource<any>;
   user: any;
 
@@ -42,7 +42,7 @@ export class VisaComponent {
     }
   }
 
-  RequestGH(): void {
-    this.matDialog.open(LeaveFormComponent)
+  RequestVisa(): void {
+    this.matDialog.open(VisaFormComponent)
   }
 }
