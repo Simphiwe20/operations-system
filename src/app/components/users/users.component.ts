@@ -13,8 +13,10 @@ import * as XLSX from 'xlsx'
 })
 export class UsersComponent implements AfterViewInit {
   ExcelData: any;
-  displayedColumns: string[] = ['id', 'name', 'progress', 'fruit', 'occupation'];
+  displayedColumns: string[] = ['email', 'name', 'surname', 'department', 'occupation'];
   dataSource: MatTableDataSource<any>;
+  users: any;
+  employees: any;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -23,8 +25,10 @@ export class UsersComponent implements AfterViewInit {
     // Create 100 users
 
     // Assign the data to the data source for the table to render
-    this.dataSource = new MatTableDataSource(this.sharedService.getData('employees'));
-    sharedService.generatePwd()
+    this.dataSource = new MatTableDataSource(this.sharedService.getData('local','employees'));
+    console.log(this.dataSource)
+    console.log(sharedService.generatePwd())
+    this.users = this.sharedService.getData('local', 'users')
   }
 
   ngAfterViewInit() {
@@ -35,20 +39,20 @@ export class UsersComponent implements AfterViewInit {
   onFileChange(event: any): void {
     let file = event.target.files[0];
     let fileReader = new FileReader();
-    fileReader.readAsBinaryString(file)
-
+    // fileReader.readAsBinaryString(file)
+    fileReader.readAsArrayBuffer(file);
     fileReader.onload = (e: any) => {
       let workBook = XLSX.read(fileReader.result, { type: 'binary' });
       let sheetNames = workBook.SheetNames;
       this.ExcelData = XLSX.utils.sheet_to_json(workBook.Sheets[sheetNames[0]])
       console.log(this.ExcelData)
       this.sharedService.storeData('local', 'employees', this.ExcelData)
-      this.dataSource = new MatTableDataSource(this.sharedService.getData('employees'));
-
+      this.dataSource = new MatTableDataSource(this.sharedService.getData('local','employees'));
+      this.sharedService.storeNewUsers()
 
     };
 
-    fileReader.readAsArrayBuffer(file);
+    // fileReader.readAsArrayBuffer(file);
   }
 
   applyFilter(event: Event) {

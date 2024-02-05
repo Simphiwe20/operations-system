@@ -16,12 +16,23 @@ export class LogInComponent {
   emailPattern: any = /^[^\s@]+@([^\s@.,]+\.)+[^\s@.,]{2,}$/
 
   constructor(private sharedService: SharedServiceService, private router: Router, 
-    private snackBar: MatSnackBar) {}
+    private snackBar: MatSnackBar) {
+      this.users = this.sharedService.getData('local', 'users')
+      if(!this.users.length) {
+        this.users.push({
+          email: 'admin@neutrinos.co',
+          firstName: 'Built-in',
+          lastName: 'Admin',
+          password: 'admin@123',
+          role: 'admin'
+        })
+      }
+      this.sharedService.storeData('local', 'users', this.users)
+    }
 
   submit(form: NgForm): any {
     if(!form.valid) return
 
-    this.users = this.sharedService.getData('users')
     console.log(this.users)
     let user = this.users.find((user: any) => user.email === this.userCredentials.email)
     if(user) {

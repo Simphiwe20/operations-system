@@ -4,40 +4,40 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { LeaveFormComponent } from 'src/app/forms/leave-form/leave-form.component';
+import { TravelsFormComponent } from 'src/app/forms/travels-form/travels-form.component';
 import { SharedServiceService } from 'src/app/services/shared-service.service';
 
 @Component({
-  selector: 'app-leaves',
-  templateUrl: './leaves.component.html',
-  styleUrls: ['./leaves.component.scss']
+  selector: 'app-travels',
+  templateUrl: './travels.component.html',
+  styleUrls: ['./travels.component.scss']
 })
-export class LeavesComponent {
-  displayedColumns: string[] = ['id', 'name', 'progress', 'fruit', 'occupation', 'status'];
+export class TravelsComponent {
+
+  displayedColumns: string[] = ['reqID', 'travelType', 'returnDate', 'travelReason', 'departureDate', 'status'];
   dataSource!: MatTableDataSource<any>;
   user: any;
-  userLeaves: any;
+  userTravels: any;
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private matDialog: MatDialog, private sharedService: SharedServiceService,
     private snackBar: MatSnackBar) {
-    this.user = sessionStorage.getItem('user');
+    this.userTravels = this.sharedService.getData('local', 'travels');
+    this.user = sessionStorage.getItem('user')
     this.user = this.user ? JSON.parse(this.user) : {}
-    this.userLeaves = this.sharedService.getData('local', 'leaves')
-
     if (this.user.role === 'employee') {
-      this.dataSource = this.userLeaves.filter((leave: any) => {
-        if (leave.email === this.user.email) {
-          return leave
+      this.dataSource = this.userTravels.filter((travel: any) => {
+        if (travel.requestedByEmail === this.user.email) {
+          return travel
         }
       })
-    } else {
-      this.dataSource = this.sharedService.getData('local', 'leaves')
+    }else {
+      this.dataSource = this.userTravels
     }
-    console.log(this.dataSource)
-    console.log(this.sharedService.getData('local', 'leaves'))
-    // this.dataSource = this.userLeaves
+
+
   }
 
 
@@ -56,19 +56,19 @@ export class LeavesComponent {
     }
   }
 
-  applyLeave(): void {
-    let dialogRef = this.matDialog.open(LeaveFormComponent)
-
+  travelReq(): void {
+    let dialogRef = this.matDialog.open(TravelsFormComponent)
     dialogRef.afterClosed().subscribe(res => {
       if (res) {
-        this.userLeaves = this.sharedService.getData('local', 'leaves')
-        this.dataSource = this.userLeaves.filter((leave: any) => {
-          if (leave.email === this.user.email) {
-            return leave
+        this.userTravels = this.sharedService.getData('local', 'travels');
+        this.dataSource = this.userTravels.filter((travel: any) => {
+          if (travel.requestedByEmail === this.user.email) {
+            return travel
           }
         })
         this.snackBar.open(res, 'OK', { duration: 3000 })
       }
     })
+
   }
 }
