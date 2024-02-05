@@ -13,7 +13,7 @@ import * as XLSX from 'xlsx'
 })
 export class UsersComponent implements AfterViewInit {
   ExcelData: any;
-  displayedColumns: string[] = ['id', 'name', 'progress', 'fruit', 'occupation'];
+  displayedColumns: string[] = ['email', 'name', 'surname', 'department', 'occupation'];
   dataSource: MatTableDataSource<any>;
   users: any;
   employees: any;
@@ -25,10 +25,10 @@ export class UsersComponent implements AfterViewInit {
     // Create 100 users
 
     // Assign the data to the data source for the table to render
-    this.dataSource = new MatTableDataSource(this.sharedService.getData('employees'));
+    this.dataSource = new MatTableDataSource(this.sharedService.getData('local','employees'));
     console.log(this.dataSource)
     console.log(sharedService.generatePwd())
-    this.users = this.sharedService.getData('users')
+    this.users = this.sharedService.getData('local', 'users')
   }
 
   ngAfterViewInit() {
@@ -47,7 +47,7 @@ export class UsersComponent implements AfterViewInit {
       this.ExcelData = XLSX.utils.sheet_to_json(workBook.Sheets[sheetNames[0]])
       console.log(this.ExcelData)
       this.sharedService.storeData('local', 'employees', this.ExcelData)
-      this.dataSource = new MatTableDataSource(this.sharedService.getData('employees'));
+      this.dataSource = new MatTableDataSource(this.sharedService.getData('local','employees'));
       this.sharedService.storeNewUsers()
 
     };

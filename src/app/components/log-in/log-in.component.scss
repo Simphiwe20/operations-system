@@ -33,3 +33,18 @@ h1 {
 
 }
 
+// Snack Bar positioning
+
+.mat-mdc-snack-bar-container {
+    .mdc-snackbar__surface {
+        position: absolute;
+        bottom: 30px;
+        right: -490px;
+    }
+}
+
+.mat-mdc-snack-bar-container {
+    --mat-mdc-snack-bar-button-color: white;
+    --mdc-snackbar-container-color: #1160cf;
+    --mdc-snackbar-supporting-text-color: rgba(255, 255, 255);
+}

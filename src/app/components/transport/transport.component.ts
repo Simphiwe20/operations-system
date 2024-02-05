@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { TransportFormComponent } from 'src/app/forms/transport-form/transport-form.component';
@@ -12,15 +13,16 @@ import { SharedServiceService } from 'src/app/services/shared-service.service';
   styleUrls: ['./transport.component.scss']
 })
 export class TransportComponent {
-  displayedColumns: string[] = ['id', 'name', 'progress', 'fruit', 'occupation', 'status'];
+  displayedColumns: string[] = ['reqID', 'transportType', 'neededDate', 'pickUpSpot', 'pickUpReason', 'dropOffSpot', 'status'];
   dataSource!: MatTableDataSource<any>;
   user: any;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private matDialog: MatDialog, private sharedService: SharedServiceService) {
-    this.dataSource = new MatTableDataSource<any>;
+  constructor(private matDialog: MatDialog, private sharedService: SharedServiceService, 
+    private snackBar: MatSnackBar) {
+    this.dataSource = this.sharedService.getData('local', 'transport');
     this.user = sessionStorage.getItem('user')
     this.user = this.user ? JSON.parse(this.user) : {}
 
@@ -43,6 +45,12 @@ export class TransportComponent {
   }
 
   requestTransport(): void {
-    this.matDialog.open(TransportFormComponent)
+    let dialogRef = this.matDialog.open(TransportFormComponent)
+    dialogRef.afterClosed().subscribe(res => {
+      if (res) {
+        this.dataSource = this.sharedService.getData('local', 'transport');
+        this.snackBar.open(res, 'OK', {duration: 3000})
+      }
+    })
   }
 }

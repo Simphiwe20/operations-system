@@ -11,41 +11,46 @@
             <table mat-table [dataSource]="dataSource" matSort>
 
                 <!-- Persal No Column -->
-                <ng-container matColumnDef="id">
+                <ng-container matColumnDef="reqID">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Req ID </th>
-                    <td mat-cell *matCellDef="let row"> {{row.Email}} </td>
+                    <td mat-cell *matCellDef="let row"> {{row.reqID}} </td>
                 </ng-container>
 
                 <!-- Department Column -->
-                <ng-container matColumnDef="fruit">
+                <ng-container matColumnDef="transportType">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Transport Type </th>
-                    <td mat-cell *matCellDef="let row"> {{row.Department}} </td>
+                    <td mat-cell *matCellDef="let row"> {{row.transportType}} </td>
                 </ng-container>
 
                 <!-- Surname Column -->
-                <ng-container matColumnDef="name">
+                <ng-container matColumnDef="neededDate">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Needed Date </th>
-                    <td mat-cell *matCellDef="let row"> {{row.Name}} </td>
+                    <td mat-cell *matCellDef="let row"> {{row.neededDate | date}} </td>
                 </ng-container>
 
 
                 <!-- Occupation Column -->
-                <ng-container matColumnDef="occupation">
+                <ng-container matColumnDef="dropOffSpot">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Drop Off Spot </th>
-                    <td mat-cell *matCellDef="let row"> {{row.Occupation}} </td>
+                    <td mat-cell *matCellDef="let row"> {{row.dropOffSpot}} </td>
                 </ng-container>
 
+                 <!-- Occupation Column -->
+                 <ng-container matColumnDef="pickUpSpot">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Pick Up Spot </th>
+                    <td mat-cell *matCellDef="let row"> {{row.pickUpSpot}} </td>
+                </ng-container>
 
                 <!-- Name Column -->
-                <ng-container matColumnDef="progress">
+                <ng-container matColumnDef="pickUpReason">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Pick Up Reason </th>
-                    <td mat-cell *matCellDef="let row"> {{row.Surname}} </td>
+                    <td mat-cell *matCellDef="let row"> {{row.pickUpReason}} </td>
                 </ng-container>
 
                 <!-- Occupation Column -->
                 <ng-container matColumnDef="status">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
-                    <td mat-cell *matCellDef="let row"> {{row.Occupation}} </td>
+                    <td mat-cell *matCellDef="let row"> {{row.status}} </td>
                 </ng-container>
 
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

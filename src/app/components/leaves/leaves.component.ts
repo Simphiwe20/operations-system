@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { LeaveFormComponent } from 'src/app/forms/leave-form/leave-form.component';
@@ -19,11 +20,13 @@ export class LeavesComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private matDialog: MatDialog, private sharedService: SharedServiceService) {
+  constructor(private matDialog: MatDialog, private sharedService: SharedServiceService, 
+    private snackBar: MatSnackBar) {
     this.dataSource = new MatTableDataSource<any>;
     this.user = sessionStorage.getItem('user');
     this.user = this.user ? JSON.parse(this.user) : {}
-
+    console.log(this.sharedService.getData('local', 'leaves'))
+    this.dataSource = this.sharedService.getData('local', 'leaves')
   }
 
 
@@ -43,6 +46,12 @@ export class LeavesComponent {
   }
 
   applyLeave(): void {
-    this.matDialog.open(LeaveFormComponent)
+    let dialogRef = this.matDialog.open(LeaveFormComponent)
+
+    dialogRef.afterClosed().subscribe(res => {
+      if(res) {
+        this.snackBar.open(res, 'OK', {duration: 3000})
+      }
+    })
   }
 }

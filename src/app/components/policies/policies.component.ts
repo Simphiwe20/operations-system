@@ -20,7 +20,7 @@ export class PoliciesComponent {
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private matDialog: MatDialog, private sharedService: SharedServiceService) {
-    this.dataSource = new MatTableDataSource<any>;
+    this.dataSource = this.sharedService.getData('local', 'policies');
     this.user = sessionStorage.getItem('user')
     this.user = this.user ? JSON.parse(this.user) : {}
     console.log(this.dataSource)
@@ -43,6 +43,11 @@ export class PoliciesComponent {
   }
 
   RequestGH(): void {
-    this.matDialog.open(PolicyFormComponent)
+    let dialogRef = this.matDialog.open(PolicyFormComponent)
+    dialogRef.afterClosed().subscribe(res => {
+      if(res) {
+        this.dataSource = this.sharedService.getData('local', 'policies')
+      }
+    })
   }
 }

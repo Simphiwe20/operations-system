@@ -11,40 +11,40 @@
             <table mat-table [dataSource]="dataSource" matSort>
 
                 <!-- Persal No Column -->
-                <ng-container matColumnDef="id">
+                <ng-container matColumnDef="reqID">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Req ID </th>
-                    <td mat-cell *matCellDef="let row"> {{row.Email}} </td>
+                    <td mat-cell *matCellDef="let row"> {{row.reqID}} </td>
                 </ng-container>
 
                 <!-- Name Column -->
-                <ng-container matColumnDef="progress">
+                <ng-container matColumnDef="travelType">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Travel Type </th>
-                    <td mat-cell *matCellDef="let row"> {{row.Surname}} </td>
+                    <td mat-cell *matCellDef="let row"> {{row.travelType}} </td>
                 </ng-container>
 
                 <!-- Surname Column -->
-                <ng-container matColumnDef="name">
+                <ng-container matColumnDef="departureDate">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Departure Date </th>
-                    <td mat-cell *matCellDef="let row"> {{row.Name}} </td>
+                    <td mat-cell *matCellDef="let row"> {{row.departureDate | date}} </td>
                 </ng-container>
 
                 <!-- Department Column -->
-                <ng-container matColumnDef="fruit">
+                <ng-container matColumnDef="returnDate">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Return Date </th>
-                    <td mat-cell *matCellDef="let row"> {{row.Department}} </td>
+                    <td mat-cell *matCellDef="let row"> {{row.returnDate | date}} </td>
                 </ng-container>
 
                 <!-- Occupation Column -->
-                <ng-container matColumnDef="occupation">
+                <ng-container matColumnDef="travelReason">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Travel Reason </th>
-                    <td mat-cell *matCellDef="let row"> {{row.Occupation}} </td>
+                    <td mat-cell *matCellDef="let row"> {{row.reasonForTravel}} </td>
                 </ng-container>
 
 
                 <!-- Occupation Column -->
                 <ng-container matColumnDef="status">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
-                    <td mat-cell *matCellDef="let row"> {{row.Occupation}} </td>
+                    <td mat-cell *matCellDef="let row"> {{row.status}} </td>
                 </ng-container>
 
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -60,7 +60,7 @@
         </div>
     </div>
     <div class="flex center-center margin-10">
-        <button mat-raised-button class="" (click)="RequestGH()" *ngIf="user.role ==='employee'" color="primary">Request
+        <button mat-raised-button class="" (click)="travelReq()" *ngIf="user.role ==='employee'" color="primary">Request
             Travel</button>
     </div>
 </div>

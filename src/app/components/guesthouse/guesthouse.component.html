@@ -11,40 +11,33 @@
             <table mat-table [dataSource]="dataSource" matSort>
 
                 <!-- Persal No Column -->
-                <ng-container matColumnDef="id">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Persal Number </th>
-                    <td mat-cell *matCellDef="let row"> {{row.Email}} </td>
+                <ng-container matColumnDef="reqID">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Req ID </th>
+                    <td mat-cell *matCellDef="let row"> {{row.reqID}} </td>
                 </ng-container>
 
                 <!-- Surname Column -->
                 <ng-container matColumnDef="name">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Start Date </th>
-                    <td mat-cell *matCellDef="let row"> {{row.Name}} </td>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> GuestHouse Name </th>
+                    <td mat-cell *matCellDef="let row"> {{row.guestHouseName}} </td>
                 </ng-container>
 
                 <!-- Department Column -->
-                <ng-container matColumnDef="fruit">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> End Date </th>
-                    <td mat-cell *matCellDef="let row"> {{row.Department}} </td>
+                <ng-container matColumnDef="checkInDate">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Check In Date </th>
+                    <td mat-cell *matCellDef="let row"> {{row.checkInDate | date}} </td>
                 </ng-container>
 
                 <!-- Occupation Column -->
-                <ng-container matColumnDef="occupation">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Days </th>
-                    <td mat-cell *matCellDef="let row"> {{row.Occupation}} </td>
-                </ng-container>
-
-
-                <!-- Name Column -->
-                <ng-container matColumnDef="progress">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Leave Type </th>
-                    <td mat-cell *matCellDef="let row"> {{row.Surname}} </td>
+                <ng-container matColumnDef="checkOutDate">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Check Out Date </th>
+                    <td mat-cell *matCellDef="let row"> {{row.checkOutDate | date}} </td>
                 </ng-container>
 
                 <!-- Occupation Column -->
                 <ng-container matColumnDef="status">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
-                    <td mat-cell *matCellDef="let row"> {{row.Occupation}} </td>
+                    <td mat-cell *matCellDef="let row"> {{row.status}} </td>
                 </ng-container>
 
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -60,6 +53,6 @@
         </div>
     </div>
     <div class="flex center-center margin-10">
-        <button mat-raised-button class="" (click)="RequestGH()" *ngIf="user.role !== 'operations personnel'" color="primary">Request Guest House</button>
+        <button mat-raised-button class="" (click)="guesthouseRequest()" *ngIf="user.role !== 'operations personnel'" color="primary">Request Guest House</button>
     </div>
 </div>

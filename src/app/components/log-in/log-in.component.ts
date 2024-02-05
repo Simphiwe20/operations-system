@@ -17,7 +17,7 @@ export class LogInComponent {
 
   constructor(private sharedService: SharedServiceService, private router: Router, 
     private snackBar: MatSnackBar) {
-      this.users = this.sharedService.getData('users')
+      this.users = this.sharedService.getData('local', 'users')
       if(!this.users.length) {
         this.users.push({
           email: 'admin@neutrinos.co',
