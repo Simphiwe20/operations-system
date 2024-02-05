@@ -17,6 +17,7 @@ export class VisaFormComponent {
     neededDate: '',
     status: 'Submitted'
   }
+  userVisas: any;
   visas: any;
   id: any = Number(`${new Date().getFullYear()}0001`)
 
@@ -29,6 +30,8 @@ export class VisaFormComponent {
     if(form.valid) {
       console.log(this.visaForm)
       this.visaForm['reqID'] = `visa-${this.id}`
+      this.visaForm['requestedBy'] = `${this.user.firstName} ${this.user.lastName}`
+      this.visaForm['requestedByEmail'] = this.user.email
       this.visas.push(this.visaForm)
       this.sharedService.storeData('local', 'visas', this.visas)
       this.id++

@@ -16,15 +16,26 @@ export class VisaComponent {
   displayedColumns: string[] = ['id', 'name', 'fruit', 'status'];
   dataSource!: MatTableDataSource<any>;
   user: any;
+  userVisas: any;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private matDialog: MatDialog, private sharedService: SharedServiceService, 
     private snackBar: MatSnackBar) {
-    this.dataSource = this.sharedService.getData('local', 'visas');
+    this.userVisas = this.sharedService.getData('local', 'visas');
     this.user = sessionStorage.getItem('user')
     this.user = this.user ? JSON.parse(this.user) : {}
+    if(this.user.role === 'emploee') {
+      this.dataSource = this.userVisas.filter((visa: any) => {
+      if(visa.requestedByEmail === this.user.email) {
+        return visa
+      }
+    })
+    }else {
+      this.dataSource = this.userVisas
+    }
+    
 
   }
 
@@ -48,8 +59,14 @@ export class VisaComponent {
     let dialogRef = this.matDialog.open(VisaFormComponent)
     dialogRef.afterClosed().subscribe(res => {
       if(res) {
+        this.userVisas = this.sharedService.getData('local', 'visas')
+        this.dataSource = this.userVisas.filter((visa: any) => {
+          if(visa.requestedByEmail === this.user.email) {
+            return visa
+          }
+        })
         this.snackBar.open(res, 'OK', {duration: 3000})
-        this.dataSource = this.sharedService.getData('local', 'visas')
+        
       }
     })
   }

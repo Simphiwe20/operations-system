@@ -14,19 +14,35 @@ import { SharedServiceService } from 'src/app/services/shared-service.service';
   styleUrls: ['./guesthouse.component.scss']
 })
 export class GuesthouseComponent {
-  displayedColumns: string[] = ['reqID', 'name', 'checkInDate', 'checkOutDate', 'status'];
+  displayedColumns!: string[];
+  // displayedColumns: string[] = ['reqID', 'name', 'checkInDate', 'checkOutDate', 'requestedBy', 'requestedByEmail','status'];
   dataSource!: MatTableDataSource<any>;
   user: any;
+  userGuestHouse: any;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private matDialog: MatDialog, private sharedService: SharedServiceService,
     private snackBar: MatSnackBar) {
-    this.dataSource = this.sharedService.getData('local', 'guesthouse');
+    this.userGuestHouse = this.sharedService.getData('local', 'guesthouse');
     this.user = sessionStorage.getItem('user')
     this.user = this.user ? JSON.parse(this.user) : {}
+    if (this.user.role === 'employee') {
+      this.dataSource = this.userGuestHouse.filter((guesthouse: any) => {
+        if (guesthouse.requestedByEmail === this.user.email)
+          return guesthouse
+      })
+    } else {
+      this.dataSource = this.userGuestHouse
+    }
 
+    if (this.user.role === 'employee') {
+      this.displayedColumns = ['reqID', 'name', 'checkInDate', 'checkOutDate', 'status'];
+    }else {
+      this.displayedColumns = ['reqID', 'name', 'checkInDate', 'checkOutDate', 'requestedBy', 'requestedByEmail','status'];
+
+    }
   }
 
 
@@ -49,8 +65,12 @@ export class GuesthouseComponent {
     let dialogRef = this.matDialog.open(GuesthouseFormComponent)
     dialogRef.afterClosed().subscribe(res => {
       this.snackBar.open(res, 'OK', { duration: 3000 })
-      this.dataSource = this.sharedService.getData('local', 'guesthouse');
-
+      this.userGuestHouse = this.sharedService.getData('local', 'guesthouse');
+      this.dataSource = this.userGuestHouse.filter((guesthouse: any) => {
+        if (guesthouse.requestedByEmail === this.user.email) {
+          return guesthouse
+        }
+      })
     })
   }
 }

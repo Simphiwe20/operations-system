@@ -19,11 +19,13 @@ export class TravelsFormComponent {
     specialNeeds: '',
     status: 'Submitted'
   }
+  user: any;
   travelData: any;
   id: any = Number(`${new Date().getFullYear()}0001`)
 
   constructor(private sharedService: SharedServiceService, private dialogRef: MatDialogRef<TravelsFormComponent>) {
     this.travelData = this.sharedService.getData('local', 'travels')
+    this.user = this.sharedService.getData('session', 'user')
   }
 
   submit(form: NgForm): void {
@@ -32,6 +34,8 @@ export class TravelsFormComponent {
         this.travelForm['specialNeeds'] = 'None'
       }
       this.travelForm['reqID'] = `travel-${this.id}`
+      this.travelForm['requestedBy'] = `${this.user.firstName} ${this.user.lastName}`
+      this.travelForm['requestedByEmail'] = this.user.email
       this.id++
       console.log(this.travelForm)
       this.travelData.push(this.travelForm)

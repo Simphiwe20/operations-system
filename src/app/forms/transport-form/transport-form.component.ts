@@ -23,17 +23,21 @@ export class TransportFormComponent {
     status: 'submitted' 
 
   }
+  user: any;
   transportData: any;
   id: any = Number(`${new Date().getFullYear()}0001`)
 
   constructor(private sharedService: SharedServiceService, private dialogRef: MatDialogRef<TransportFormComponent>) {
     this.transportData = this.sharedService.getData('local', 'transport')
+    this.user = this.sharedService.getData('session', 'user')
   }
 
   submit(form: NgForm): void {
     if(form.valid) {
       console.log(this.transportForm)
       this.transportForm['reqID'] = this.id
+      this.transportForm['requestedBy'] = `${this.user.firstName} ${this.user.lastName}`
+      this.transportForm['requestedByEmail'] = this.user.email
       this.transportData.push(this.transportForm)
       this.sharedService.storeData('local', 'transport', this.transportData)
       this.id++

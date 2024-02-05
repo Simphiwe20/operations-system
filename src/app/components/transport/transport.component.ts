@@ -16,15 +16,26 @@ export class TransportComponent {
   displayedColumns: string[] = ['reqID', 'transportType', 'neededDate', 'pickUpSpot', 'pickUpReason', 'dropOffSpot', 'status'];
   dataSource!: MatTableDataSource<any>;
   user: any;
+  userTransport: any;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private matDialog: MatDialog, private sharedService: SharedServiceService, 
+  constructor(private matDialog: MatDialog, private sharedService: SharedServiceService,
     private snackBar: MatSnackBar) {
-    this.dataSource = this.sharedService.getData('local', 'transport');
+    this.userTransport = this.sharedService.getData('local', 'transport');
     this.user = sessionStorage.getItem('user')
     this.user = this.user ? JSON.parse(this.user) : {}
+    if (this.user.role === 'employee') {
+      this.dataSource = this.userTransport.filter((transport: any) => {
+        if (transport.requestedByEmail === this.user.email) {
+          return transport
+        }
+      })
+    }else {
+      this.dataSource = this.userTransport
+    }
+
 
   }
 
@@ -48,8 +59,13 @@ export class TransportComponent {
     let dialogRef = this.matDialog.open(TransportFormComponent)
     dialogRef.afterClosed().subscribe(res => {
       if (res) {
-        this.dataSource = this.sharedService.getData('local', 'transport');
-        this.snackBar.open(res, 'OK', {duration: 3000})
+        this.userTransport = this.sharedService.getData('local', 'transport');
+        this.dataSource = this.userTransport.filter((transport: any) => {
+          if (transport.requestedByEmail === this.user.email) {
+            return transport
+          }
+        })
+        this.snackBar.open(res, 'OK', { duration: 3000 })
       }
     })
   }

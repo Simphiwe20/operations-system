@@ -16,17 +16,28 @@ export class LeavesComponent {
   displayedColumns: string[] = ['id', 'name', 'progress', 'fruit', 'occupation', 'status'];
   dataSource!: MatTableDataSource<any>;
   user: any;
-
+  userLeaves: any;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private matDialog: MatDialog, private sharedService: SharedServiceService, 
+  constructor(private matDialog: MatDialog, private sharedService: SharedServiceService,
     private snackBar: MatSnackBar) {
-    this.dataSource = new MatTableDataSource<any>;
     this.user = sessionStorage.getItem('user');
     this.user = this.user ? JSON.parse(this.user) : {}
+    this.userLeaves = this.sharedService.getData('local', 'leaves')
+
+    if (this.user.role === 'employee') {
+      this.dataSource = this.userLeaves.filter((leave: any) => {
+        if (leave.email === this.user.email) {
+          return leave
+        }
+      })
+    } else {
+      this.dataSource = this.sharedService.getData('local', 'leaves')
+    }
+    console.log(this.dataSource)
     console.log(this.sharedService.getData('local', 'leaves'))
-    this.dataSource = this.sharedService.getData('local', 'leaves')
+    // this.dataSource = this.userLeaves
   }
 
 
@@ -49,8 +60,14 @@ export class LeavesComponent {
     let dialogRef = this.matDialog.open(LeaveFormComponent)
 
     dialogRef.afterClosed().subscribe(res => {
-      if(res) {
-        this.snackBar.open(res, 'OK', {duration: 3000})
+      if (res) {
+        this.userLeaves = this.sharedService.getData('local', 'leaves')
+        this.dataSource = this.userLeaves.filter((leave: any) => {
+          if (leave.email === this.user.email) {
+            return leave
+          }
+        })
+        this.snackBar.open(res, 'OK', { duration: 3000 })
       }
     })
   }

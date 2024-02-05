@@ -17,15 +17,25 @@ export class TravelsComponent {
   displayedColumns: string[] = ['reqID', 'travelType', 'returnDate', 'travelReason', 'departureDate', 'status'];
   dataSource!: MatTableDataSource<any>;
   user: any;
+  userTravels: any;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private matDialog: MatDialog, private sharedService: SharedServiceService,
     private snackBar: MatSnackBar) {
-    this.dataSource = this.sharedService.getData('local', 'travels');
+    this.userTravels = this.sharedService.getData('local', 'travels');
     this.user = sessionStorage.getItem('user')
     this.user = this.user ? JSON.parse(this.user) : {}
+    if (this.user.role === 'employee') {
+      this.dataSource = this.userTravels.filter((travel: any) => {
+        if (travel.requestedByEmail === this.user.email) {
+          return travel
+        }
+      })
+    }else {
+      this.dataSource = this.userTravels
+    }
 
 
   }
@@ -50,7 +60,12 @@ export class TravelsComponent {
     let dialogRef = this.matDialog.open(TravelsFormComponent)
     dialogRef.afterClosed().subscribe(res => {
       if (res) {
-        this.dataSource = this.sharedService.getData('local', 'travels');
+        this.userTravels = this.sharedService.getData('local', 'travels');
+        this.dataSource = this.userTravels.filter((travel: any) => {
+          if (travel.requestedByEmail === this.user.email) {
+            return travel
+          }
+        })
         this.snackBar.open(res, 'OK', { duration: 3000 })
       }
     })
